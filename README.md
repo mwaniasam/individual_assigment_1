@@ -61,7 +61,7 @@ lib/
 │   └── task_form_screen.dart
 ├── services/                 # Business logic
 │   └── database_helper.dart
-└── widgets/                  # Reusable components
+└── widgets/                  # Reusable component
     └── task_card.dart
 ```
 
