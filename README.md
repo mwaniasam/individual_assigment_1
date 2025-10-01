@@ -37,10 +37,6 @@ flutter pub get
 flutter run
 ```
 
-## 📱 Screenshots
-
-*Add your app screenshots here*
-
 ## 🛠️ Built With
 
 - **Flutter**: UI framework
@@ -69,20 +65,6 @@ lib/
     └── task_card.dart
 ```
 
-## 🤝 Contributing
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
-
-Project Link: [https://github.com/yourusername/flutter-study-planner](https://github.com/yourusername/flutter-study-planner)
+Samuel Mwania - [s.mwania@alustudent.com](mailto:s.mwania@alustudent.com)
