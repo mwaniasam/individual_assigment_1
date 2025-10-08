@@ -9,6 +9,13 @@ class ThemeProvider extends ChangeNotifier {
   // Platform-specific elevation values
   final double _cardElevation = Platform.isIOS ? 1.0 : 2.0;
   final double _navBarElevation = Platform.isIOS ? 0.0 : 8.0;
+
+  // Theme transition durations
+  final Duration themeChangeDuration = const Duration(milliseconds: 300);
+  final Duration colorTweenDuration = const Duration(milliseconds: 200);
+  
+  /// Returns a curve for theme transition animations
+  Curve get themeChangeCurve => Curves.easeInOut;
   bool _isDarkMode = false;
   bool _remindersEnabled = true;
 
@@ -184,12 +191,19 @@ class ThemeProvider extends ChangeNotifier {
   Color get errorColor => _isDarkMode ? _darkError : _lightError;
   Color get successColor => _isDarkMode ? _darkSuccess : _lightSuccess;
 
+  /// Toggles between light and dark theme with animation support
+  /// 
+  /// The transition will use [themeChangeDuration] and [themeChangeCurve]
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
     notifyListeners();
   }
 
+  /// Sets the theme mode with animation support
+  /// 
+  /// @param isDark Whether to set dark mode (true) or light mode (false)
   void setTheme(bool isDark) {
+    if (_isDarkMode == isDark) return;
     _isDarkMode = isDark;
     notifyListeners();
   }
