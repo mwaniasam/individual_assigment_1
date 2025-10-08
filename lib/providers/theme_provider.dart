@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:io' show Platform;
 
 class ThemeProvider extends ChangeNotifier {
+  // Platform-specific corner radius
+  final double _cornerRadius = Platform.isIOS ? 12.0 : 8.0;
+  
+  // Platform-specific elevation values
+  final double _cardElevation = Platform.isIOS ? 1.0 : 2.0;
+  final double _navBarElevation = Platform.isIOS ? 0.0 : 8.0;
   bool _isDarkMode = false;
   bool _remindersEnabled = true;
 
@@ -29,19 +36,24 @@ class ThemeProvider extends ChangeNotifier {
       primarySwatch: Colors.deepPurple,
       colorScheme: colorScheme,
       cardTheme: CardThemeData(
-        elevation: 2,
+        elevation: _cardElevation,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(_cornerRadius),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(_cornerRadius),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          borderRadius: BorderRadius.circular(_cornerRadius),
+          borderSide: BorderSide(color: colorScheme.primary, width: Platform.isIOS ? 1.0 : 2.0),
         ),
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        elevation: _navBarElevation,
+        selectedItemColor: colorScheme.primary,
+        unselectedItemColor: Colors.grey,
       ),
     );
   }
