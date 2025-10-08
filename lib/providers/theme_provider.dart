@@ -190,6 +190,30 @@ class ThemeProvider extends ChangeNotifier {
   void setReminders(bool enabled) {
     _remindersEnabled = enabled;
     notifyListeners();
+    _savePreferences();
+  }
+
+  /// Saves the current theme and reminder preferences to persistent storage
+  /// 
+  /// This method will be implemented to save preferences using SharedPreferences
+  Future<void> _savePreferences() async {
+    // TODO: Implement saving preferences using SharedPreferences
+    // await SharedPreferences.getInstance().then((prefs) {
+    //   prefs.setBool('darkMode', _isDarkMode);
+    //   prefs.setBool('reminders', _remindersEnabled);
+    // });
+  }
+
+  /// Loads saved theme and reminder preferences from persistent storage
+  /// 
+  /// This method will be implemented to load preferences using SharedPreferences
+  Future<void> loadPreferences() async {
+    // TODO: Implement loading preferences using SharedPreferences
+    // await SharedPreferences.getInstance().then((prefs) {
+    //   _isDarkMode = prefs.getBool('darkMode') ?? false;
+    //   _remindersEnabled = prefs.getBool('reminders') ?? true;
+    //   notifyListeners();
+    // });
   }
 
   /// Returns the appropriate color for a task's status visualization
