@@ -10,6 +10,12 @@ class ThemeProvider extends ChangeNotifier {
   final double _cardElevation = Platform.isIOS ? 1.0 : 2.0;
   final double _navBarElevation = Platform.isIOS ? 0.0 : 8.0;
 
+  // Brightness override settings
+  Brightness? _brightnessOverride;
+  bool get hasOverride => _brightnessOverride != null;
+  Brightness get effectiveBrightness => 
+      _brightnessOverride ?? (_isDarkMode ? Brightness.dark : Brightness.light);
+
   // Theme transition durations
   final Duration themeChangeDuration = const Duration(milliseconds: 300);
   final Duration colorTweenDuration = const Duration(milliseconds: 200);
@@ -217,6 +223,24 @@ class ThemeProvider extends ChangeNotifier {
     _remindersEnabled = enabled;
     notifyListeners();
     _savePreferences();
+  }
+
+  /// Override the brightness setting independently of the theme mode
+  /// 
+  /// This is useful for specific screens or contexts where you want to
+  /// temporarily force a specific brightness without changing the overall theme.
+  /// Pass null to remove the override.
+  void overrideBrightness(Brightness? brightness) {
+    if (_brightnessOverride == brightness) return;
+    _brightnessOverride = brightness;
+    notifyListeners();
+  }
+
+  /// Clear any active brightness override
+  void clearBrightnessOverride() {
+    if (_brightnessOverride == null) return;
+    _brightnessOverride = null;
+    notifyListeners();
   }
 
   /// Saves the current theme and reminder preferences to persistent storage
