@@ -192,17 +192,34 @@ class ThemeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Get appropriate color for task status
+  /// Returns the appropriate color for a task's status visualization
+  /// 
+  /// - Returns [successColor] if the task is completed
+  /// - Returns [errorColor] if the task is overdue
+  /// - Returns [primaryColor] for ongoing tasks
   Color getTaskStatusColor(bool isCompleted, bool isOverdue) {
     if (isCompleted) return successColor;
     if (isOverdue) return errorColor;
     return primaryColor;
   }
 
-  // Get appropriate icon for task status
+  /// Returns the appropriate icon for a task's status visualization
+  /// 
+  /// - Returns [Icons.check_circle] for completed tasks
+  /// - Returns [Icons.warning] for overdue tasks
+  /// - Returns [Icons.circle_outlined] for ongoing tasks
   IconData getTaskStatusIcon(bool isCompleted, bool isOverdue) {
     if (isCompleted) return Icons.check_circle;
     if (isOverdue) return Icons.warning;
     return Icons.circle_outlined;
+  }
+
+  /// Returns a text description of the task's status
+  /// 
+  /// This method can be used for accessibility or tooltip text
+  String getTaskStatusDescription(bool isCompleted, bool isOverdue) {
+    if (isCompleted) return 'Task completed';
+    if (isOverdue) return 'Task overdue';
+    return 'Task in progress';
   }
 }
