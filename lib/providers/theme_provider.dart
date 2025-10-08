@@ -22,24 +22,43 @@ class ThemeProvider extends ChangeNotifier {
   static const Color _darkError = Color(0xFFEF5350);
   static const Color _darkSuccess = Color(0xFF81C784);
 
-  ThemeData get lightTheme {
+  // Common theme configurations that are shared between light and dark themes
+  ThemeData _baseTheme(ColorScheme colorScheme) {
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.light,
       primarySwatch: Colors.deepPurple,
-      primaryColor: _lightPrimary,
-      colorScheme: ColorScheme.light(
-        primary: _lightPrimary,
-        secondary: _lightSecondary,
-        background: _lightBackground,
-        surface: _lightBackground,
-        error: _lightError,
-        onPrimary: Colors.white,
-        onSecondary: Colors.black,
-        onBackground: Colors.black,
-        onSurface: Colors.black,
-        onError: Colors.white,
+      colorScheme: colorScheme,
+      cardTheme: CardThemeData(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+        ),
+      ),
+    );
+  }
+
+  ThemeData get lightTheme {
+    final colorScheme = ColorScheme.light(
+      primary: _lightPrimary,
+      secondary: _lightSecondary,
+      surface: _lightBackground,
+      error: _lightError,
+      onPrimary: Colors.white,
+      onSecondary: Colors.black,
+      onSurface: Colors.black,
+      onError: Colors.white,
+    );
+    
+    return _baseTheme(colorScheme).copyWith(
       scaffoldBackgroundColor: _lightBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: _lightPrimary,
@@ -86,23 +105,19 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   ThemeData get darkTheme {
-    return ThemeData(
-      useMaterial3: true,
+    final colorScheme = ColorScheme.dark(
+      primary: _darkPrimary,
+      secondary: _darkSecondary,
+      surface: const Color(0xFF1E1E1E),
+      error: _darkError,
+      onPrimary: Colors.black,
+      onSecondary: Colors.black,
+      onSurface: Colors.white,
+      onError: Colors.black,
+    );
+    
+    return _baseTheme(colorScheme).copyWith(
       brightness: Brightness.dark,
-      primarySwatch: Colors.deepPurple,
-      primaryColor: _darkPrimary,
-      colorScheme: ColorScheme.dark(
-        primary: _darkPrimary,
-        secondary: _darkSecondary,
-        background: _darkBackground,
-        surface: const Color(0xFF1E1E1E),
-        error: _darkError,
-        onPrimary: Colors.black,
-        onSecondary: Colors.black,
-        onBackground: Colors.white,
-        onSurface: Colors.white,
-        onError: Colors.black,
-      ),
       scaffoldBackgroundColor: _darkBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: _darkPrimary,
